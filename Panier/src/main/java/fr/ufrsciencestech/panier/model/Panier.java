@@ -1,16 +1,18 @@
 package fr.ufrsciencestech.panier.model;
 
-import fr.ufrsciencestech.panier.model.Fruit;
-import fr.ufrsciencestech.panier.model.Fruit;
-import fr.ufrsciencestech.panier.model.Orange;
-import fr.ufrsciencestech.panier.model.Orange;
 import java.util.ArrayList;
 
 public class Panier {
     private ArrayList<Fruit> fruits;
     private int contenanceMax;
 
+<<<<<<< Updated upstream
     public Panier(int contenanceMax) {
+=======
+    public Panier(String name,int contenanceMax) {
+        this.setName(name);
+        prixtotale=0;
+>>>>>>> Stashed changes
         this.fruits = new ArrayList<Fruit>();
         if (contenanceMax < 1) {
             throw new IllegalArgumentException("La contenance maximale doit être supérieure à 0");
@@ -105,7 +107,7 @@ public class Panier {
     }
 
     public void boycotteOrigine(String origine) {
-        //fruits.removeIf(fruit -> fruit.getOrigine().equals(origine));
+        fruits.removeIf(fruit -> fruit.getOrigine().equals(origine));
     }
 
     @Override
@@ -125,7 +127,7 @@ public class Panier {
     
     public static void main(String[] args) {
         // Tests de la classe Panier
-        Panier p = new Panier(5);
+        Panier p = new Panier("",5);
 
         Orange o1 = new Orange(0.2, "Espagne");
         Orange o2 = new Orange(0.3, "France");
