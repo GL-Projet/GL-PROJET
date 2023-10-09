@@ -9,8 +9,12 @@ import java.util.ArrayList;
 public class Panier {
     private ArrayList<Fruit> fruits;
     private int contenanceMax;
+    private double prixtotale;
+    private String name;
+    private String type;
 
     public Panier(int contenanceMax) {
+        prixtotale=0;
         this.fruits = new ArrayList<Fruit>();
         if (contenanceMax < 1) {
             throw new IllegalArgumentException("La contenance maximale doit être supérieure à 0");
@@ -44,6 +48,30 @@ public class Panier {
         return contenanceMax;
     }
 
+    public double getPrixtotale() {
+        return prixtotale;
+    }
+
+    public void setPrixtotale(double prixtotale) {
+        for (Fruit fruit:fruits)this.prixtotale+= fruit.getPrix();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Fruit getFruit(int i) {
         if (i >= 0 && i < fruits.size()) {
             return fruits.get(i);
@@ -67,6 +95,7 @@ public class Panier {
         return fruits.size() >= contenanceMax;
         
     }
+
 
     public class PanierPleinException extends Exception {
         public PanierPleinException(String message) {
@@ -159,47 +188,3 @@ public class Panier {
     }
 }
 
-class Papaye implements Fruit {
-    private double prix;
-    private String origine;
-
-    public Papaye(double prix, String origine) {
-        this.prix = prix;
-        this.origine = origine;
-    }
-
-    @Override
-    public boolean isSeedless() {
-        return true; // Papaye sans pépins
-    }
-
-    @Override
-    public double getPrix() {
-        return prix;
-    }
-
-    @Override
-    public String getOrigine() {
-        return origine;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        Papaye papaye = (Papaye) o;
-
-        if (Double.compare(papaye.prix, prix) != 0)
-            return false;
-        return origine != null ? origine.equals(papaye.origine) : papaye.origine == null;
-    }
-
-    @Override
-    public String toString() {
-        return "Papaye de " + origine + " a " + prix + " euros";
-    }
-}
- 
