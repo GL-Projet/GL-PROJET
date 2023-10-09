@@ -82,4 +82,13 @@ public class ColtrollerPanier {
         return listeTemp;
     }
 
+    public void CreatePanier(String nom,int capmax){
+        listePanier.getListePanier().add(new Panier(nom,capmax));
+    }
+
+    public void RemovePanier(String nom){
+        listePanier.getListePanier().removeIf(panier -> panier.getName().equals(nom));
+    }
+//    public void ModifPanier(){}
+
 }
