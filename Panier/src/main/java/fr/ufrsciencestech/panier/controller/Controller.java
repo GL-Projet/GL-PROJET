@@ -31,7 +31,7 @@ public class Controller {
     public Controller(VueGSwing viewgs, VueConsole viewc){
         this.vgs = viewgs;
         this.vc = viewc;
-        this.panier = new Panier(5);
+        this.panier = new Panier("",5);
         this.compteur = 0;
         
         //pour initialiser le jlabel compteur

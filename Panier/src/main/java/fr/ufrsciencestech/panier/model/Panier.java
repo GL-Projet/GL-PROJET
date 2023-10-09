@@ -13,7 +13,8 @@ public class Panier {
     private String name;
     private String type;
 
-    public Panier(int contenanceMax) {
+    public Panier(String nom,int contenanceMax) {
+        this.setName(nom);
         prixtotale=0;
         this.fruits = new ArrayList<Fruit>();
         if (contenanceMax < 1) {
@@ -134,7 +135,7 @@ public class Panier {
     }
 
     public void boycotteOrigine(String origine) {
-        //fruits.removeIf(fruit -> fruit.getOrigine().equals(origine));
+        fruits.removeIf(fruit -> fruit.getOrigine().equals(origine));
     }
 
     @Override
@@ -154,7 +155,7 @@ public class Panier {
     
     public static void main(String[] args) {
         // Tests de la classe Panier
-        Panier p = new Panier(5);
+        Panier p = new Panier("",5);
 
         Orange o1 = new Orange(0.2, "Espagne");
         Orange o2 = new Orange(0.3, "France");
