@@ -1,9 +1,5 @@
 package fr.ufrsciencestech.panier.model;
 
-import fr.ufrsciencestech.panier.model.Fruit;
-import fr.ufrsciencestech.panier.model.Fruit;
-import fr.ufrsciencestech.panier.model.Orange;
-import fr.ufrsciencestech.panier.model.Orange;
 import java.util.ArrayList;
 
 public class Panier {
@@ -13,8 +9,8 @@ public class Panier {
     private String name;
     private String type;
 
-    public Panier(String nom,int contenanceMax) {
-        this.setName(nom);
+    public Panier(String name,int contenanceMax) {
+        this.setName(name);
         prixtotale=0;
         this.fruits = new ArrayList<Fruit>();
         if (contenanceMax < 1) {
