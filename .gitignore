@@ -25,5 +25,6 @@ hs_err_pid*
 
 #IntelliJ packages
 .idea
-.idea/*
-target
+
+*.xml
+.idea/GL-PROJET.iml
