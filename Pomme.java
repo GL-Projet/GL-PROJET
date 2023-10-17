@@ -59,21 +59,4 @@ public class Pomme implements Fruit {
         return false;
     }
 
-
-    public static void main (String[] args){
-        //Ecrire ici vos tests
-	//System.out.println("premier test Pomme");
-
-        Pomme o1 = new Pomme();
-        Pomme o2 = new Pomme(1.23, "");
-        Pomme o3 = new Pomme(1.5, "Maroc");
-        
-        o1.setOrigine("Suisse");
-        o2.setPrix(2.25);
-
-        System.out.println(o1.toString());
-        System.out.println(o2.toString());
-        System.out.println(o3.toString());
-
-   }
 }

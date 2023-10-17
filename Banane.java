@@ -59,15 +59,4 @@ public class Banane implements Fruit{
         return false;
     }
 
-
-//     public static void main (String[] args){
-//         System.out.println("premier test Banane");
-//         Banane o1=new Banane();
-//         Banane o2=new Banane(10, "Espagne");
-//         Banane o3=new Banane(-5, "Espagne");
-//         System.out.println(o1.toString());
-//         System.out.println(o2.toString());
-//         System.out.println(o3.toString());
-//         System.out.println(o3.equals(o1));
-//    }
 }

@@ -66,6 +66,7 @@ public class Orange implements Fruit{
         return false;
     }
 
+<<<<<<< Updated upstream
 
     public static void main (String[] args){
         //Ecrire ici vos tests
@@ -79,4 +80,6 @@ public class Orange implements Fruit{
     System.out.println(o1.toString());
     System.out.println(o2.toString());
    }
+=======
+>>>>>>> Stashed changes
 }
