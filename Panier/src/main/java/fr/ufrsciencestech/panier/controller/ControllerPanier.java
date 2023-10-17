@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ColtrollerPanier {
+public class ControllerPanier {
 
     private ListePanier listePanier;
 
-    public ColtrollerPanier() {
+    public ControllerPanier() {
         this.listePanier=new ListePanier();
     }
 
-    public ColtrollerPanier(ListePanier listePanier) {
+    public ControllerPanier(ListePanier listePanier) {
         this.listePanier = listePanier;
     }
 
