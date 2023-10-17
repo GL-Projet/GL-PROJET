@@ -1,6 +1,6 @@
 package fr.ufrsciencestech.panier.model;
 
-class Papaye implements Fruit {
+class Papaye implements IFruit {
     private double prix;
     private String origine;
 

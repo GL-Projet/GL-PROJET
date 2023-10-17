@@ -3,7 +3,7 @@ package fr.ufrsciencestech.panier.model;
 import java.util.ArrayList;
 
 public class Panier {
-    private ArrayList<Fruit> fruits;
+    private ArrayList<IFruit> fruits;
     private int contenanceMax;
     private double prixtotale;
     private String name;
@@ -12,7 +12,7 @@ public class Panier {
     public Panier(String name,int contenanceMax) {
         this.setName(name);
         prixtotale=0;
-        this.fruits = new ArrayList<Fruit>();
+        this.fruits = new ArrayList<IFruit>();
         if (contenanceMax < 1) {
             throw new IllegalArgumentException("La contenance maximale doit être supérieure à 0");
         } else {
@@ -23,17 +23,17 @@ public class Panier {
     @Override
     public String toString() {
         String result = "";
-        for (Fruit f : fruits) {
+        for (IFruit f : fruits) {
             result += f.toString() + "\n";
         }
         return result;
     }
 
-    public ArrayList<Fruit> getFruits() {
+    public ArrayList<IFruit> getFruits() {
         return fruits;
     }
 
-    public void setFruits(ArrayList<Fruit> fruits) {
+    public void setFruits(ArrayList<IFruit> fruits) {
         this.fruits = fruits;
     }
 
@@ -50,7 +50,7 @@ public class Panier {
     }
 
     public void setPrixtotale(double prixtotale) {
-        for (Fruit fruit:fruits)this.prixtotale+= fruit.getPrix();
+        for (IFruit fruit:fruits)this.prixtotale+= fruit.getPrix();
     }
 
     public String getName() {
@@ -69,7 +69,7 @@ public class Panier {
         this.type = type;
     }
 
-    public Fruit getFruit(int i) {
+    public IFruit getFruit(int i) {
         if (i >= 0 && i < fruits.size()) {
             return fruits.get(i);
         } else {
@@ -77,7 +77,7 @@ public class Panier {
         }
     }
 
-    public void setFruit(int i, Fruit f) {
+    public void setFruit(int i, IFruit f) {
         if (i >= 0 && i < fruits.size()) {
             fruits.set(i, f);
         }
@@ -106,7 +106,7 @@ public class Panier {
         }
     }
     //modifier
-    public void ajout(Fruit o) throws PanierPleinException {
+    public void ajout(IFruit o) throws PanierPleinException {
         if (!estPlein() /*(&& !fruits.contains(o))*/) {
             fruits.add(o);
         } else {
@@ -124,7 +124,7 @@ public class Panier {
 
     public double getPrix() {
         double prix = 0.0;
-        for (Fruit f : fruits) {
+        for (IFruit f : fruits) {
             prix += f.getPrix();
         }
         return prix;

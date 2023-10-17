@@ -64,8 +64,8 @@ public class ConnexionBDD {
     
     
     //récuperer les fruits depuis la table Fruit de BDD (proposer liste de fruit)
-    public List<Fruit> listeFruit() {
-        List<Fruit> fruits = new ArrayList<>();
+    public List<IFruit> listeFruit() {
+        List<IFruit> fruits = new ArrayList<>();
         
         String requete = "SELECT * FROM fruit";
         try(PreparedStatement preparedStatement = connection.prepareStatement(requete);
@@ -77,9 +77,11 @@ public class ConnexionBDD {
                 String type = resultSet.getString("type");
                 
                 
-                Fruit fruit = new Fruit(nom, prix, origine, type);
-                
-                fruits.add(fruit);
+//                Fruit fruit = new Fruit(nom, prix, origine, type);
+//                fruits.add(fruit);
+
+
+
             }
         } catch (SQLException e){
             System.err.println("Erreur lors de la recuperation des données");
@@ -132,8 +134,8 @@ public class ConnexionBDD {
     }
     
     //pour trier les fruits en utilisant le filtre fruit
-    public List<Fruit> getFruitByName(String text, String filter) {
-        List<Fruit> fruits = new ArrayList<>();
+    public List<IFruit> getFruitByName(String text, String filter) {
+        List<IFruit> fruits = new ArrayList<>();
         String requete = "";
         switch (filter){
             case "Fruit":{
@@ -157,9 +159,11 @@ public class ConnexionBDD {
                 String type = resultSet.getString("type");
                 
                 
-                Fruit fruit = new Fruit(nom, prix, origine, type);
-                
-                fruits.add(fruit);
+//                Fruit fruit = new Fruit(nom, prix, origine, type);
+//                fruits.add(fruit);
+
+
+
             }
         } catch (SQLException e){
             System.err.println("Erreur lors de la recuperation des données");

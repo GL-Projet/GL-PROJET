@@ -1,6 +1,6 @@
 package fr.ufrsciencestech.panier.controller;
 
-import fr.ufrsciencestech.panier.model.Fruit;
+import fr.ufrsciencestech.panier.model.IFruit;
 import fr.ufrsciencestech.panier.model.ListePanier;
 import fr.ufrsciencestech.panier.model.Panier;
 
@@ -50,19 +50,19 @@ public class ControllerPanier {
         return listeTemp;
     }
 
-    public ArrayList<Fruit> filterOrigineFruitPanier(Panier panier, String origine){
-        Stream<Fruit> stream=panier.getFruits()
+    public ArrayList<IFruit> filterOrigineFruitPanier(Panier panier, String origine){
+        Stream<IFruit> stream=panier.getFruits()
                 .stream()
                 .filter(fruit -> fruit.getOrigine().equals(origine));
-        ArrayList<Fruit> arrayList = new ArrayList<Fruit>(stream.collect(Collectors.toList()));
+        ArrayList<IFruit> arrayList = new ArrayList<IFruit>(stream.collect(Collectors.toList()));
         return arrayList;
     }
 
-    public ArrayList<Fruit> filterNomFruitPanier(Panier panier,String nom){
-        Stream<Fruit>stream=(panier.getFruits())
+    public ArrayList<IFruit> filterNomFruitPanier(Panier panier,String nom){
+        Stream<IFruit>stream=(panier.getFruits())
                 .stream()
                 .filter(fruit -> fruit.getNom().equals(nom));
-        ArrayList<Fruit> arrayList = new ArrayList<Fruit>(stream.collect(Collectors.toList()));
+        ArrayList<IFruit> arrayList = new ArrayList<IFruit>(stream.collect(Collectors.toList()));
         return arrayList;
     }
 
