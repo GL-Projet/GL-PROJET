@@ -20,12 +20,19 @@ public class ControllerPanier {
         this.listePanier = listePanier;
     }
 
-    public ListePanier getListePanier() {
-        return listePanier;
+    public ArrayList<Panier> getListePanier() {
+        return listePanier.getListePanier();
     }
 
     public void setListePanier(ListePanier listePanier) {
         this.listePanier = listePanier;
+    }
+
+    public void insertPanier(Panier p){
+        if(listePanirNom(p.getName()).isEmpty())
+            listePanier.getListePanier().add(p);
+        else
+            throw new IllegalArgumentException("Le panier existe deja dans la liste");
     }
 
     public ArrayList<Panier> listePanirFruitOrigine(String origine){
