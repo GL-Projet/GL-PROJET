@@ -1,9 +1,5 @@
 package fr.ufrsciencestech.panier.model;
 
-/**
- *
- * @author roudet
- */
 public class Orange implements Fruit{
     private double prix;
     private String origine;
@@ -21,7 +17,7 @@ public class Orange implements Fruit{
 	else
 	    this.prix = prix;
 
-	if(origine.equals(""))
+	if(origine.isEmpty())
             this.origine = "Espagne";  //Espagne par défaut
 	else
             this.origine = origine;   
@@ -68,15 +64,15 @@ public class Orange implements Fruit{
 
 
     public static void main (String[] args){
-        //Ecrire ici vos tests
-	System.out.println("premier test Orange");
-    Orange o1 = new Orange();
-    Orange o2 = new Orange(1.23, "");
+        // Ecrire ici vos tests
+        // System.out.println("premier test Orange");
+        // Orange o1 = new Orange();
+        // Orange o2 = new Orange(1.23, "");
 
-    o1.setOrigine("Suisse");
-    o2.setPrix(2.25);
+        // o1.setOrigine("Suisse");
+        // o2.setPrix(2.25);
 
-    System.out.println(o1.toString());
-    System.out.println(o2.toString());
+        // System.out.println(o1.toString());
+        // System.out.println(o2.toString());
    }
 }

@@ -1,7 +1,5 @@
-/**
- *
- * @author roudet
- */
+package fr.ufrsciencestech.panier.model;
+
 public class Pomme implements Fruit {
     private double prix;
     private String origine;
@@ -19,7 +17,7 @@ public class Pomme implements Fruit {
 	else
 	    this.prix = prix;
 
-	if(origine.equals(""))
+	if(origine.isEmpty())
             this.origine = "Espagne";  //Espagne par défaut
 	else
             this.origine = origine;   
@@ -36,7 +34,12 @@ public class Pomme implements Fruit {
     public String getOrigine(){
 	return origine;
     }
- 
+
+    @Override
+    public String getNom() {
+        return getClass().getName();
+    }
+
     public void setOrigine(String origine){
 	this.origine=origine;
     }
