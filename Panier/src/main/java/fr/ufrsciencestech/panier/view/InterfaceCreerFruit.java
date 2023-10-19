@@ -4,13 +4,15 @@
  */
 package fr.ufrsciencestech.panier.view;
 
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author betul
  */
 public class InterfaceCreerFruit extends javax.swing.JFrame {
+    private ActionListener boutonValiderListener;
 
     /**
      * Creates new form InterfaceCreerFruit
@@ -29,9 +31,34 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
         jLabelNom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPrix.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelOrigine.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
         
     }
+    
+    //pour initialiser la liste du nom des fruits
+    public void remplirComboBox(String element){
+        DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) listFruit.getModel();
+        comboBoxModel.addElement(element);
+    }
+    
+    public void buttonValiderListener(ActionListener listener) {
+        this.boutonValiderListener = listener;
+    }
+    
+    //pour récuperer les champs
+    public String getChampFruit(){
+        return listFruit.getSelectedItem().toString();
+    }
+    
+    public double getChampPrix(){
+        return Double.parseDouble(jTextFieldPrix.getText());
+    }
+    
+    public String getChampOrigine(){
+        return jTextFieldOrigine.getText();
+    }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,7 +73,7 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
         jLabelTitre = new javax.swing.JLabel();
         jPanelGrilleInfo = new javax.swing.JPanel();
         jLabelNom = new javax.swing.JLabel();
-        jTextFieldNom = new javax.swing.JTextField();
+        listFruit = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabelPrix = new javax.swing.JLabel();
@@ -55,10 +82,6 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabelOrigine = new javax.swing.JLabel();
         jTextFieldOrigine = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabelType = new javax.swing.JLabel();
-        jTextFieldType = new javax.swing.JTextField();
         jPanelBouton = new javax.swing.JPanel();
         jButtonAbandonner = new javax.swing.JButton();
         jButtonValider = new javax.swing.JButton();
@@ -84,12 +107,7 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
         jLabelNom.setText("Nom:");
         jPanelGrilleInfo.add(jLabelNom);
 
-        jTextFieldNom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomActionPerformed(evt);
-            }
-        });
-        jPanelGrilleInfo.add(jTextFieldNom);
+        jPanelGrilleInfo.add(listFruit);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,7 +135,7 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
 
         jPanelGrilleInfo.add(jPanel2);
 
-        jLabelPrix.setText("Prix (au kilos) :");
+        jLabelPrix.setText("Prix €/kg :");
         jPanelGrilleInfo.add(jLabelPrix);
         jPanelGrilleInfo.add(jTextFieldPrix);
 
@@ -151,36 +169,6 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
         jPanelGrilleInfo.add(jLabelOrigine);
         jPanelGrilleInfo.add(jTextFieldOrigine);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-
-        jPanelGrilleInfo.add(jPanel5);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-
-        jPanelGrilleInfo.add(jPanel6);
-
-        jLabelType.setText("Type : ");
-        jPanelGrilleInfo.add(jLabelType);
-        jPanelGrilleInfo.add(jTextFieldType);
-
         jPanelBouton.setLayout(new java.awt.GridLayout(1, 2));
 
         jButtonAbandonner.setText("Abandonner");
@@ -192,6 +180,11 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
         jPanelBouton.add(jButtonAbandonner);
 
         jButtonValider.setText("Valider");
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderActionPerformed(evt);
+            }
+        });
         jPanelBouton.add(jButtonValider);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,13 +218,16 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomActionPerformed
-
     private void jButtonAbandonnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbandonnerActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonAbandonnerActionPerformed
+
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+        // TODO add your handling code here:
+        if(boutonValiderListener != null) {
+            boutonValiderListener.actionPerformed(evt);
+        }
+    }//GEN-LAST:event_jButtonValiderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,19 +271,15 @@ public class InterfaceCreerFruit extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelOrigine;
     private javax.swing.JLabel jLabelPrix;
     private javax.swing.JLabel jLabelTitre;
-    private javax.swing.JLabel jLabelType;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelBouton;
     private javax.swing.JPanel jPanelGrilleInfo;
     private javax.swing.JPanel jPanelTitre;
-    private javax.swing.JTextField jTextFieldNom;
     private javax.swing.JTextField jTextFieldOrigine;
     private javax.swing.JTextField jTextFieldPrix;
-    private javax.swing.JTextField jTextFieldType;
+    private javax.swing.JComboBox<String> listFruit;
     // End of variables declaration//GEN-END:variables
 }

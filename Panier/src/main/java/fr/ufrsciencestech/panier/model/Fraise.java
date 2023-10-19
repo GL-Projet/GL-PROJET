@@ -6,51 +6,50 @@ public class Fraise implements Fruit {
 
     public Fraise()
     {
-        this.prix = 0.5;  //prix en euros
-        this.origine="Espagne";
+        this.prix = 0.0;  //prix en euros
+        this.origine= "";
     }
 
     public Fraise(double prix, String origine)
     {
-        if(prix < 0)
-            this.prix = -prix;  //une solution possible pour interdire les prix negatifs
-        else
-            this.prix = prix;
-
-        if(origine.isEmpty())
-            this.origine = "Espagne";  //Espagne par défaut
-        else
-            this.origine = origine;
+        this.prix = prix;
+        this.origine = origine;
     }
 
     public double getPrix(){
         return prix;
     }
-
+    
     public void setPrix(double prix){
-        this.prix=prix;
+        if(prix < 0)
+            this.prix = -prix;
+        else
+            this.prix=prix;
     }
 
     public String getOrigine(){
         return origine;
     }
+    
+    public void setOrigine(String origine){
+        if(origine.isEmpty())
+            this.origine = "France";
+        else
+            this.origine=origine;
+    }
 
     @Override
     public String getNom() {
-        return getClass().getName();
-    }
-
-    public void setOrigine(String origine){
-        this.origine=origine;
+        return "Fraise";
     }
 
     @Override
     public String toString(){
-        return "Banane de " + origine + " a " + prix + " euros";
+        return "Fraise de " + origine + " à " + prix + " €/kg";
     }
 
     @Override
-    public boolean equals(Object o){  //predicat pour tester si 2 Bananes sont equivalentes
+    public boolean equals(Object o){  //predicat pour tester si 2 Fraises sont equivalentes
         if(o != null && getClass() == o.getClass()){
             Fraise fraise = (Fraise) o;
             return (prix == fraise.prix && origine.equals(fraise.origine));
@@ -58,7 +57,7 @@ public class Fraise implements Fruit {
         return false;
     }
 
-    public boolean isSeedless() {  //predicat indiquant qu'une Banane a des pepins
+    public boolean isSeedless() {  //predicat indiquant qu'une Fraise a des pepins
         return false;
     }
 

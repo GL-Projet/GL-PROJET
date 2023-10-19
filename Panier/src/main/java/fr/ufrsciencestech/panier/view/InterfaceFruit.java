@@ -6,6 +6,8 @@ package fr.ufrsciencestech.panier.view;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.*;
+import java.awt.event.ActionListener;
 
 
 
@@ -14,6 +16,10 @@ import javax.swing.ImageIcon;
  * @author betul
  */
 public class InterfaceFruit extends javax.swing.JFrame {
+    
+    private DefaultListModel<String> listModel;
+    private ActionListener boutonRechercheListener;
+    private ActionListener boutonAjoutBoycottListener;
 
     /**
      * Creates new form InterfaceFruit
@@ -31,26 +37,63 @@ public class InterfaceFruit extends javax.swing.JFrame {
         jLabelNomPanier.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 17));
         jLabelBoycot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
-        ImageIcon IconRecherche = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/recherche.png");
+        ImageIcon IconRecherche = new ImageIcon("src/main/java/image/recherche.png");
         jButtonRecherche.setIcon(IconRecherche);
         
-        ImageIcon IconPlus = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/plus.png");
+        ImageIcon IconPlus = new ImageIcon("src/main/java/image/plus.png");
         jButtonAjouter.setIcon(IconPlus);
         
-        ImageIcon IconSuprBoycot = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/corbeil.png");
+        ImageIcon IconSuprBoycot = new ImageIcon("src/main/java/image/corbeil.png");
         jButtonSuprBoycot.setIcon(IconSuprBoycot);
         
-        ImageIcon IconSupr = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/corbeil.png");
+        ImageIcon IconSupr = new ImageIcon("src/main/java/image/corbeil.png");
         jButtonSupr.setIcon(IconSupr);
         
-        ImageIcon IconModif = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/modifier.png");
+        ImageIcon IconModif = new ImageIcon("src/main/java/image/modifier.png");
         jButtonModif.setIcon(IconModif);
-        
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        jList1.setModel(listModel);
+        //pour la liste des pays à boycotter
+        listModel = new DefaultListModel<>();
+        jListBoycot.setModel(listModel);
        
        
     }
+    
+    
+    //remplir la liste de fruit proposée au client lors du remplissage du panier
+    public void remplirComboBox(String element){
+        DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) jComboBoxFruit.getModel();
+        
+        comboBoxModel.addElement(element);
+    }
+    
+    public void ecraserLF(){
+        DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) jComboBoxFruit.getModel();
+        
+        comboBoxModel.removeAllElements();
+    }
+    
+    //pour le filtrage des fruits
+    public void buttonRechercherListener(ActionListener listener){
+        this.boutonRechercheListener = listener;
+    }
+    
+    public String getFilterText(){
+        return jTextField1.getText();
+    }
+    
+    public String getFilter(){
+        return jComboBox1.getSelectedItem().toString();
+    }
+    
+    //pour boycotter
+    public void buttonAjoutBoycottListener(ActionListener listener){
+        this.boutonAjoutBoycottListener = listener;
+    }
+    
+    public DefaultListModel<String> getListeBoycott(){
+        return this.listModel;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,9 +119,9 @@ public class InterfaceFruit extends javax.swing.JFrame {
         jButtonAjouter = new javax.swing.JButton();
         jTextFieldSaisie = new javax.swing.JTextField();
         jButtonSuprBoycot = new javax.swing.JButton();
-        jPanelLIstePays = new javax.swing.JPanel();
+        jPanelListePays = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jListBoycot = new javax.swing.JList<>();
         jPanelDroite = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabelNomPanier = new javax.swing.JLabel();
@@ -151,7 +194,7 @@ public class InterfaceFruit extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fruit", "Origine", "Type" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fruit", "Origine", "" }));
 
         javax.swing.GroupLayout jPanelFiltreLayout = new javax.swing.GroupLayout(jPanelFiltre);
         jPanelFiltre.setLayout(jPanelFiltreLayout);
@@ -222,22 +265,22 @@ public class InterfaceFruit extends javax.swing.JFrame {
                         .addComponent(jButtonAjouter, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))))
         );
 
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        jListBoycot.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList1ValueChanged(evt);
+                jListBoycotValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListBoycot);
 
-        javax.swing.GroupLayout jPanelLIstePaysLayout = new javax.swing.GroupLayout(jPanelLIstePays);
-        jPanelLIstePays.setLayout(jPanelLIstePaysLayout);
-        jPanelLIstePaysLayout.setHorizontalGroup(
-            jPanelLIstePaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelListePaysLayout = new javax.swing.GroupLayout(jPanelListePays);
+        jPanelListePays.setLayout(jPanelListePaysLayout);
+        jPanelListePaysLayout.setHorizontalGroup(
+            jPanelListePaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
         );
-        jPanelLIstePaysLayout.setVerticalGroup(
-            jPanelLIstePaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLIstePaysLayout.createSequentialGroup()
+        jPanelListePaysLayout.setVerticalGroup(
+            jPanelListePaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListePaysLayout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
         );
@@ -251,7 +294,7 @@ public class InterfaceFruit extends javax.swing.JFrame {
                     .addComponent(jPanelLigneAjoutBoycot, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanelLIstePays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanelListePays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -259,7 +302,7 @@ public class InterfaceFruit extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanelLigneAjoutBoycot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelLIstePays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelListePays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -276,7 +319,7 @@ public class InterfaceFruit extends javax.swing.JFrame {
                             .addComponent(jPanelLigneRecherche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelFiltre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelTextBoycot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelGaucheLayout.setVerticalGroup(
             jPanelGaucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,14 +372,13 @@ public class InterfaceFruit extends javax.swing.JFrame {
             .addGroup(jPanelLigneAjoutFruitLayout.createSequentialGroup()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxFruit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxFruit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Poids, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonValiderAjout)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonValiderAjout))
         );
         jPanelLigneAjoutFruitLayout.setVerticalGroup(
             jPanelLigneAjoutFruitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,11 +441,6 @@ public class InterfaceFruit extends javax.swing.JFrame {
                 .addComponent(jButtonSupr, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jListFruit.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "item1", "item2", "item3" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jListFruit);
 
         javax.swing.GroupLayout jPanelListePanierLayout = new javax.swing.GroupLayout(jPanelListePanier);
@@ -442,15 +479,12 @@ public class InterfaceFruit extends javax.swing.JFrame {
             jPanelDroiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelDroiteLayout.createSequentialGroup()
-                .addGroup(jPanelDroiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelDroiteLayout.createSequentialGroup()
-                        .addComponent(jPanelLigneAjoutFruit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanelDroiteLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 342, Short.MAX_VALUE))
+            .addGroup(jPanelDroiteLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanelLigneAjoutFruit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelDroiteLayout.setVerticalGroup(
             jPanelDroiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,9 +532,9 @@ public class InterfaceFruit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelGauche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanelDroite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(45, 45, 45))
+                        .addContainerGap())
                     .addComponent(jPanelTitreModif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -513,16 +547,18 @@ public class InterfaceFruit extends javax.swing.JFrame {
                     .addComponent(jPanelGauche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelDroite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 111, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
-        String texteSaisi = jTextFieldSaisie.getText(); 
-        DefaultListModel<String> listModel = (DefaultListModel<String>) jList1.getModel(); 
+        String texteSaisi = jTextFieldSaisie.getText();  
         listModel.addElement(texteSaisi); 
+        if(boutonAjoutBoycottListener != null){
+            boutonAjoutBoycottListener.actionPerformed(evt);
+        }
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jTextFieldSaisieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaisieActionPerformed
@@ -553,6 +589,9 @@ public class InterfaceFruit extends javax.swing.JFrame {
 
     private void jButtonRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRechercheActionPerformed
         // TODO add your handling code here:
+        if(boutonRechercheListener != null){
+            boutonRechercheListener.actionPerformed(evt);
+        }
     }//GEN-LAST:event_jButtonRechercheActionPerformed
 
     private void jMenuItemCreerFruitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreerFruitActionPerformed
@@ -562,21 +601,23 @@ public class InterfaceFruit extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCreerFruitActionPerformed
 
     private void jButtonSuprBoycotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuprBoycotActionPerformed
-        DefaultListModel<String> listModel = (DefaultListModel<String>) jList1.getModel();
 
-    // Obtenez l'index de l'élément sélectionné dans jList1
-    int selectedIndex = jList1.getSelectedIndex();
+        // Obtenez l'index de l'élément sélectionné dans jList1
+        int selectedIndex = jListBoycot.getSelectedIndex();
 
-    // Assurez-vous qu'un élément est sélectionné (l'index n'est pas -1)
-    if (selectedIndex != -1) {
-        // Supprimez l'élément sélectionné du modèle de liste
-        listModel.removeElementAt(selectedIndex);
-    }
+        // Assurez-vous qu'un élément est sélectionné (l'index n'est pas -1)
+        if (selectedIndex != -1) {
+            // Supprimez l'élément sélectionné du modèle de liste
+            listModel.removeElementAt(selectedIndex);
+        }
+        if(boutonAjoutBoycottListener != null){
+            boutonAjoutBoycottListener.actionPerformed(evt);
+        }
     }//GEN-LAST:event_jButtonSuprBoycotActionPerformed
 
-    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+    private void jListBoycotValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListBoycotValueChanged
         
-    }//GEN-LAST:event_jList1ValueChanged
+    }//GEN-LAST:event_jListBoycotValueChanged
 
     private void jButtonModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifActionPerformed
         InterfaceModifieFruit nouvelleInterface = new InterfaceModifieFruit();
@@ -636,7 +677,7 @@ public class InterfaceFruit extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBoycot;
     private javax.swing.JLabel jLabelModif;
     private javax.swing.JLabel jLabelNomPanier;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jListBoycot;
     private javax.swing.JList<String> jListFruit;
     private javax.swing.JMenu jMenuAjouter;
     private javax.swing.JMenuBar jMenuBar1;
@@ -649,11 +690,11 @@ public class InterfaceFruit extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelDroite;
     private javax.swing.JPanel jPanelFiltre;
     private javax.swing.JPanel jPanelGauche;
-    private javax.swing.JPanel jPanelLIstePays;
     private javax.swing.JPanel jPanelLigneAjoutBoycot;
     private javax.swing.JPanel jPanelLigneAjoutFruit;
     private javax.swing.JPanel jPanelLigneRecherche;
     private javax.swing.JPanel jPanelListePanier;
+    private javax.swing.JPanel jPanelListePays;
     private javax.swing.JPanel jPanelTextBoycot;
     private javax.swing.JPanel jPanelTitreModif;
     private javax.swing.JPanel jPanelValider;

@@ -6,21 +6,14 @@ public class Banane implements Fruit{
 	
     public Banane() 
     {
-        this.prix = 0.5;  //prix en euros
-        this.origine="Espagne";
+        this.prix = 0.0;  //prix en euros
+        this.origine= "";
     }
     
     public Banane(double prix, String origine) 
     {
-	if(prix < 0)
-	    this.prix = -prix;  //une solution possible pour interdire les prix negatifs
-	else
-	    this.prix = prix;
-
-	if(origine.isEmpty())
-            this.origine = "Espagne";  //Espagne par défaut
-	else
-            this.origine = origine;   
+	this.prix = prix;
+        this.origine = origine;
     }
 
     public double getPrix(){
@@ -28,25 +21,32 @@ public class Banane implements Fruit{
     }
 
     public void setPrix(double prix){
-	this.prix=prix;
+	if (prix < 0)
+            this.prix = -prix;
+        else
+            this.prix = prix;
     }
 
     public String getOrigine(){
 	return origine;
     }
+    
+    public void setOrigine(String origine){
+        if(origine.isEmpty())
+            this.origine = "France";
+        else
+            this.origine=origine;
+    }
 
     @Override
     public String getNom() {
-        return getClass().getName();
+        return "Banane";
     }
 
-    public void setOrigine(String origine){
-	this.origine=origine;
-    }
 
     @Override
     public String toString(){
-        return "Banane de " + origine + " a " + prix + " euros";
+        return "Banane de " + origine + " à " + prix + " €/kg";
     }
 
     @Override
@@ -62,15 +62,4 @@ public class Banane implements Fruit{
         return false;
     }
 
-
-//     public static void main (String[] args){
-//         System.out.println("premier test Banane");
-//         Banane o1=new Banane();
-//         Banane o2=new Banane(10, "Espagne");
-//         Banane o3=new Banane(-5, "Espagne");
-//         System.out.println(o1.toString());
-//         System.out.println(o2.toString());
-//         System.out.println(o3.toString());
-//         System.out.println(o3.equals(o1));
-//    }
 }

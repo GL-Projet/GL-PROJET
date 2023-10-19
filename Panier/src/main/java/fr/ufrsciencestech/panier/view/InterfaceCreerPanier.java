@@ -4,12 +4,14 @@
  */
 package fr.ufrsciencestech.panier.view;
 
+import java.awt.event.ActionListener;
 /**
  *
  * @author betul
  */
 public class InterfaceCreerPanier extends javax.swing.JFrame {
 
+    private ActionListener boutonValiderListener;
     /**
      * Creates new form InterfaceCreerPanier
      */
@@ -29,7 +31,22 @@ public class InterfaceCreerPanier extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
     }
+    
+    public void buttonValiderListener(ActionListener listener){
+        this.boutonValiderListener = listener;
+    }
+    
+    public String getNom(){
+        return jTextFieldNom.getText();
+    }
+    
+    public String gettype(){
+        return jTextFieldType.getText();
+    }
 
+    public int getCapacite(){
+        return Integer.parseInt(jTextFieldCapaciteMax.getText());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,6 +168,11 @@ public class InterfaceCreerPanier extends javax.swing.JFrame {
         jPanelBouton.add(jButtonAbandonner);
 
         jButtonValider.setText("Valider");
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderActionPerformed(evt);
+            }
+        });
         jPanelBouton.add(jButtonValider);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,6 +204,13 @@ public class InterfaceCreerPanier extends javax.swing.JFrame {
     private void jButtonAbandonnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbandonnerActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonAbandonnerActionPerformed
+
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+        // TODO add your handling code here:
+        if(boutonValiderListener != null){
+            boutonValiderListener.actionPerformed(evt);
+        }
+    }//GEN-LAST:event_jButtonValiderActionPerformed
 
     /**
      * @param args the command line arguments

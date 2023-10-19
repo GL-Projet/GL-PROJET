@@ -5,13 +5,20 @@
 package fr.ufrsciencestech.panier.view;
 
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
 /**
  *
  * @author betul
  */
 public class InterfacePanier extends javax.swing.JFrame {
-
+    
+    private DefaultListModel<String> listModel;
+    private ActionListener boutonModifListener;
+    private ActionListener boutonCreerFruitListener;
+    private ActionListener boutonCreerPanierListener;
+    
     /**
      * Creates new form InterfacePanier
      */
@@ -32,12 +39,39 @@ public class InterfacePanier extends javax.swing.JFrame {
         
         jLabelNomPanier.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNomPanier.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 18));
-
-        ImageIcon imageIcon = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/recherche.png");
+        
+        ImageIcon imageIcon = new ImageIcon("src/main/java/image/recherche.png");
         // Affectez l'image au bouton
         jButton1.setIcon(imageIcon);
+        //pour remplir la liste des paniers
+        listModel = new DefaultListModel<>();
+        jListPays.setModel(listModel);
         
-        
+
+    }
+    
+    //remplir la liste des paniers 
+    public void remplirListPanier(String element){
+        listModel.addElement(element);
+    }
+    
+    public void ecraserLP(){
+        listModel.removeAllElements();
+    }
+    
+    //ouvrir l'interface qui contient les fruits en cliquant sur modifier
+    public void buttonModifierListener(ActionListener listener){
+        this.boutonModifListener = listener;
+    }
+    
+    //ouvrir l'interface qui permet de creer un fruit
+    public void buttonCreerFruitListener(ActionListener listener){
+        this.boutonCreerFruitListener = listener;
+    }
+    
+    //ouvrir l'interface qui permet de creer un panier
+    public void buttonCreerPanierListener(ActionListener listener){
+        this.boutonCreerPanierListener = listener;
     }
 
     /**
@@ -336,9 +370,9 @@ public class InterfacePanier extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSupprimerActionPerformed
 
     private void jButtonModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierActionPerformed
-        InterfaceFruit nouvelleInterface = new InterfaceFruit();
-        // Rendez la nouvelle interface visible
-        nouvelleInterface.setVisible(true);
+        if(boutonModifListener != null){
+            boutonModifListener.actionPerformed(evt);
+        }
     }//GEN-LAST:event_jButtonModifierActionPerformed
 
     private void jMenuAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAjouterActionPerformed
@@ -350,15 +384,15 @@ public class InterfacePanier extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItemCreerPanierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreerPanierActionPerformed
-        InterfaceCreerPanier nouvelleInterface = new InterfaceCreerPanier();
-        // Rendez la nouvelle interface visible
-        nouvelleInterface.setVisible(true);
+        if(boutonCreerPanierListener != null){
+            boutonCreerPanierListener.actionPerformed(evt);
+        }
     }//GEN-LAST:event_jMenuItemCreerPanierActionPerformed
 
     private void jMenuItemCreerFruitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreerFruitActionPerformed
-        InterfaceCreerFruit nouvelleInterface = new InterfaceCreerFruit();
-        // Rendez la nouvelle interface visible
-        nouvelleInterface.setVisible(true);
+        if(boutonCreerFruitListener != null){
+            boutonCreerFruitListener.actionPerformed(evt);
+        }
     }//GEN-LAST:event_jMenuItemCreerFruitActionPerformed
 
     /**

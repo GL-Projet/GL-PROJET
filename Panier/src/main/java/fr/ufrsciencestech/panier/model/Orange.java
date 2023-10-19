@@ -6,21 +6,14 @@ public class Orange implements Fruit{
 	
     public Orange() 
     {
-        this.prix = 0.5;  //prix en euros
-        this.origine="Espagne";
+        this.prix = 0.0;  //prix en euros
+        this.origine= "";
     }
     
     public Orange(double prix, String origine) 
     {
-	if(prix < 0)
-	    this.prix = -prix;  //une solution possible pour interdire les prix negatifs
-	else
-	    this.prix = prix;
-
-	if(origine.isEmpty())
-            this.origine = "Espagne";  //Espagne par défaut
-	else
-            this.origine = origine;   
+	this.prix = prix;
+        this.origine = origine;
     }
 
     public double getPrix(){
@@ -28,11 +21,21 @@ public class Orange implements Fruit{
     }
 
     public void setPrix(double prix){
-	this.prix=prix;
+        if(prix < 0)
+            this.prix = -prix;
+        else
+            this.prix=prix;
     }
 
     public String getOrigine(){
 	return origine;
+    }
+    
+    public void setOrigine(String origine){
+        if(origine.isEmpty())
+            this.origine = "France";
+        else
+            this.origine=origine;
     }
 
     @Override
@@ -40,13 +43,9 @@ public class Orange implements Fruit{
         return "Orange";
     }
 
-    public void setOrigine(String origine){
-	this.origine=origine;
-    }
-
     @Override
     public String toString(){
-        return "Orange de " + origine + " a " + prix + " euros";
+        return "Orange de " + origine + " à " + prix + " €/kg";
     }
 
     @Override
@@ -63,16 +62,5 @@ public class Orange implements Fruit{
     }
 
 
-    public static void main (String[] args){
-        // Ecrire ici vos tests
-        // System.out.println("premier test Orange");
-        // Orange o1 = new Orange();
-        // Orange o2 = new Orange(1.23, "");
-
-        // o1.setOrigine("Suisse");
-        // o2.setPrix(2.25);
-
-        // System.out.println(o1.toString());
-        // System.out.println(o2.toString());
-   }
+ 
 }

@@ -9,10 +9,11 @@ public class Panier {
     private String name;
     private String type;
 
-    public Panier(String name,int contenanceMax) {
+    public Panier(String name, String type, int contenanceMax) {
         this.setName(name);
+        this.setType(type);
         prixtotale=0;
-        this.fruits = new ArrayList<Fruit>();
+        //this.fruits = new ArrayList<Fruit>();
         if (contenanceMax < 1) {
             throw new IllegalArgumentException("La contenance maximale doit être supérieure à 0");
         } else {
@@ -50,7 +51,8 @@ public class Panier {
     }
 
     public void setPrixtotale(double prixtotale) {
-        for (Fruit fruit:fruits)this.prixtotale+= fruit.getPrix();
+        for (Fruit fruit:fruits)
+            this.prixtotale+= fruit.getPrix();
     }
 
     public String getName() {
@@ -131,7 +133,7 @@ public class Panier {
     }
 
     public void boycotteOrigine(String origine) {
-        fruits.removeIf(fruit -> fruit.getOrigine().equals(origine));
+        //fruits.removeIf(fruit -> fruit.getOrigin().equals(origine));
     }
 
     @Override
@@ -148,7 +150,7 @@ public class Panier {
         return fruits != null ? fruits.equals(panier.fruits) : panier.fruits == null;
     }
 
-    
+    /*
     public static void main(String[] args) {
         // Tests de la classe Panier
         Panier p = new Panier("",5);
@@ -182,6 +184,5 @@ public class Panier {
         } catch (Exception e) {
             System.err.println(e);
         }
-    }
+    }*/
 }
-
