@@ -559,6 +559,7 @@ public class InterfaceFruit extends javax.swing.JFrame {
         if(boutonAjoutBoycottListener != null){
             boutonAjoutBoycottListener.actionPerformed(evt);
         }
+        jTextFieldSaisie.setText("");
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jTextFieldSaisieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaisieActionPerformed
