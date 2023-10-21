@@ -62,17 +62,4 @@ public class Orange implements Fruit{
         return false;
     }
 
-
-    public static void main (String[] args){
-        // Ecrire ici vos tests
-        // System.out.println("premier test Orange");
-        // Orange o1 = new Orange();
-        // Orange o2 = new Orange(1.23, "");
-
-        // o1.setOrigine("Suisse");
-        // o2.setPrix(2.25);
-
-        // System.out.println(o1.toString());
-        // System.out.println(o2.toString());
-   }
 }

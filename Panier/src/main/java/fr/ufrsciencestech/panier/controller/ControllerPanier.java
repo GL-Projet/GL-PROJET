@@ -3,6 +3,7 @@ package fr.ufrsciencestech.panier.controller;
 import fr.ufrsciencestech.panier.model.Fruit;
 import fr.ufrsciencestech.panier.model.ListePanier;
 import fr.ufrsciencestech.panier.model.Panier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -28,74 +29,113 @@ public class ControllerPanier {
         this.listePanier = listePanier;
     }
 
-    public void insertPanier(Panier p){
-        if(listePanirNom(p.getName()).isEmpty())
+    public void insertPanier(@NotNull Panier p){
+        if (listePanier.getListePanier().isEmpty())
             listePanier.getListePanier().add(p);
-        else
-            throw new IllegalArgumentException("Le panier existe deja dans la liste");
+        else {
+            if (listePanierNom(p.getName()).isEmpty())
+                listePanier.getListePanier().add(p);
+            else
+                throw new IllegalArgumentException("Le panier existe deja dans la liste");
+        }
     }
 
-    public ArrayList<Panier> listePanirFruitOrigine(String origine){
-        Stream<Panier> temp=listePanier.getListePanier()
-                .stream()
-                .filter(panier -> !filterOrigineFruitPanier(panier,origine).isEmpty());
-        ArrayList<Panier> listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
-        return listeTemp;
-    }
-    public ArrayList<Panier> listePanirNom(String nom){
-        Stream<Panier> temp=listePanier.getListePanier()
-                .stream()
-                .filter(panier -> panier.getName().equals(nom));
-        ArrayList<Panier> listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
-        return listeTemp;
-    }
-    public ArrayList<Panier> listePanirFruit(String nom){
-        Stream<Panier> temp=listePanier.getListePanier()
-                .stream()
-                .filter(panier -> !filterNomFruitPanier(panier,nom).isEmpty());
-        ArrayList<Panier> listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
-        return listeTemp;
+    public void removePanier(String nomPanier){
+        if (listePanier.getListePanier().isEmpty()){
+            throw new ArrayStoreException("La liste des paniers est vide");
+        }else
+            if (listePanierNom(nomPanier).isEmpty())
+                throw new IllegalArgumentException("Le panier nexiste pas");
+            else
+                listePanier.getListePanier().removeIf(panier -> panier.getName().equals(nomPanier));
     }
 
-    public ArrayList<Fruit> filterOrigineFruitPanier(Panier panier, String origine){
-        Stream<Fruit> stream=panier.getFruits()
-                .stream()
-                .filter(fruit -> fruit.getOrigine().equals(origine));
-        ArrayList<Fruit> arrayList = new ArrayList<Fruit>(stream.collect(Collectors.toList()));
+    public ArrayList<Panier> listePanierFruitOrigine(String origine){
+        ArrayList<Panier> listeTemp=new ArrayList<Panier>();
+        if (listePanier.getListePanier().isEmpty()){
+            throw new ArrayStoreException("La liste des paniers est vide");
+        }else {
+            Stream<Panier> temp = listePanier.getListePanier()
+                    .stream()
+                    .filter(panier -> !filterOrigineFruitPanier(panier, origine).isEmpty());
+            listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
+        }
+        return listeTemp;
+    }
+    public ArrayList<Panier> listePanierNom(String nom){
+        ArrayList<Panier> listeTemp=new ArrayList<Panier>();
+        if (listePanier.getListePanier().isEmpty()){
+            throw new ArrayStoreException("La liste des paniers est vide");
+        }else {
+            Stream<Panier> temp = listePanier.getListePanier()
+                    .stream()
+                    .filter(panier -> panier.getName().equals(nom));
+            listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
+        }
+        return listeTemp;
+    }
+    public ArrayList<Panier> listePanierFruit(String nom){
+        ArrayList<Panier> listeTemp=new ArrayList<Panier>();
+        if (listePanier.getListePanier().isEmpty()){
+            throw new ArrayStoreException("La liste des paniers est vide");
+        }else{
+            Stream<Panier> temp = listePanier.getListePanier()
+                    .stream()
+                    .filter(panier -> !filterNomFruitPanier(panier, nom).isEmpty());
+            listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
+        }
+        return listeTemp;
+    }
+    public ArrayList<Fruit> filterOrigineFruitPanier(@NotNull Panier panier, String origine){
+        ArrayList<Fruit> arrayList=new ArrayList<Fruit>();
+        if (panier.getFruits().isEmpty()){
+            throw new ArrayStoreException("Le panier est vide");
+        }else {
+            Stream<Fruit> stream = panier.getFruits()
+                    .stream()
+                    .filter(fruit -> fruit.getOrigine().equals(origine));
+            arrayList = new ArrayList<Fruit>(stream.collect(Collectors.toList()));
+        }
         return arrayList;
     }
 
-    public ArrayList<Fruit> filterNomFruitPanier(Panier panier,String nom){
-        Stream<Fruit>stream=(panier.getFruits())
-                .stream()
-                .filter(fruit -> fruit.getNom().equals(nom));
-        ArrayList<Fruit> arrayList = new ArrayList<Fruit>(stream.collect(Collectors.toList()));
+    public ArrayList<Fruit> filterNomFruitPanier(@NotNull Panier panier, String nom){
+        ArrayList<Fruit> arrayList=new ArrayList<Fruit>();
+        if (panier.getFruits().isEmpty()){
+            throw new ArrayStoreException("Le panier est vide");
+        }else {
+            Stream<Fruit> stream = (panier.getFruits())
+                    .stream()
+                    .filter(fruit -> fruit.getNom().equals(nom));
+            arrayList = new ArrayList<Fruit>(stream.collect(Collectors.toList()));
+        }
         return arrayList;
     }
 
     public ArrayList<Panier> filterPrixtotalePanier(double prix){
-        Stream<Panier> temp=listePanier.getListePanier()
-                .stream()
-                .filter(panier -> panier.getPrixtotale()<=prix);
-        ArrayList<Panier> listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
+        ArrayList<Panier> listeTemp=new ArrayList<Panier>();
+        if (listePanier.getListePanier().isEmpty()){
+            throw new ArrayStoreException("La liste des paniers est vide");
+        }else {
+            Stream<Panier> temp = listePanier.getListePanier()
+                    .stream()
+                    .filter(panier -> panier.getPrixtotale() <= prix);
+            listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
+        }
         return listeTemp;
     }
 
     public ArrayList<Panier> filterPanierType(String type){
-        Stream<Panier> temp=listePanier.getListePanier()
-                .stream()
-                .filter(panier -> panier.getType().equals(type));
-        ArrayList<Panier> listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
+        ArrayList<Panier> listeTemp=new ArrayList<Panier>();
+        if (listePanier.getListePanier().isEmpty()){
+            throw new ArrayStoreException("La liste des paniers est vide");
+        }else {
+            Stream<Panier> temp = listePanier.getListePanier()
+                    .stream()
+                    .filter(panier -> panier.getType().equals(type));
+            listeTemp = new ArrayList<Panier>(temp.collect(Collectors.toList()));
+        }
         return listeTemp;
     }
-
-    public void CreatePanier(String nom,int capmax){
-        listePanier.getListePanier().add(new Panier(nom,capmax));
-    }
-
-    public void RemovePanier(String nom){
-        listePanier.getListePanier().removeIf(panier -> panier.getName().equals(nom));
-    }
-//    public void ModifPanier(){}
 
 }
