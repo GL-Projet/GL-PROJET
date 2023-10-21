@@ -162,6 +162,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e){
                 fr.setVisible(true);
+                fr.receivePanier(ip.getPanier());
             }
         });
         

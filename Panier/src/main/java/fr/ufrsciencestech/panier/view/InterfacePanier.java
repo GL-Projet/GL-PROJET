@@ -47,6 +47,8 @@ public class InterfacePanier extends javax.swing.JFrame {
         listModel = new DefaultListModel<>();
         jListPanier.setModel(listModel);
         
+        jButtonModifier.setEnabled(false);
+        jButtonSupprimer.setEnabled(false);
 
     }
     
@@ -74,6 +76,10 @@ public class InterfacePanier extends javax.swing.JFrame {
         this.boutonCreerPanierListener = listener;
     }
 
+    //pour recuperer le panier selectionner
+    public String getPanier(){
+        return jListPanier.getSelectedValue();
+    }
 
     
     /**
@@ -146,6 +152,11 @@ public class InterfacePanier extends javax.swing.JFrame {
             }
         });
 
+        jListPanier.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListPanierValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListPanier);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -396,6 +407,13 @@ public class InterfacePanier extends javax.swing.JFrame {
             boutonCreerFruitListener.actionPerformed(evt);
         }
     }//GEN-LAST:event_jMenuItemCreerFruitActionPerformed
+
+    private void jListPanierValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPanierValueChanged
+        // TODO add your handling code here:
+        jLabelNomPanier.setText(jListPanier.getSelectedValue());
+        jButtonModifier.setEnabled(true);
+        jButtonSupprimer.setEnabled(true);
+    }//GEN-LAST:event_jListPanierValueChanged
 
     /**
      * @param args the command line arguments
