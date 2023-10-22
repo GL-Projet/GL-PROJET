@@ -72,6 +72,9 @@ public class Orange implements Fruit{
         return false;
     }
 
+<<<<<<< HEAD
 
  
+=======
+>>>>>>> 408b3d41611d508bf8ff92eb3551747cca4b282e
 }

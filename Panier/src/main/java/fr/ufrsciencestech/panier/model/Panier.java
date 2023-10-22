@@ -11,13 +11,17 @@ public class Panier {
 
     public Panier(String name, String type, int contenanceMax) {
         this.setName(name);
+<<<<<<< HEAD
         this.setType(type);
         prixtotale=0;
         //this.fruits = new ArrayList<Fruit>();
+=======
+>>>>>>> 408b3d41611d508bf8ff92eb3551747cca4b282e
         if (contenanceMax < 1) {
             throw new IllegalArgumentException("La contenance maximale doit être supérieure à 0");
         } else {
             this.contenanceMax = contenanceMax;
+            this.fruits = new ArrayList<Fruit>(contenanceMax);
         }
     }
 
@@ -47,12 +51,18 @@ public class Panier {
     }
 
     public double getPrixtotale() {
+        this.setPrixtotale();
         return prixtotale;
     }
 
+<<<<<<< HEAD
     public void setPrixtotale(double prixtotale) {
         for (Fruit fruit:fruits)
             this.prixtotale+= fruit.getPrix();
+=======
+    private void setPrixtotale() {
+        prixtotale=0;for (Fruit fruit:fruits)this.prixtotale+= fruit.getPrix();
+>>>>>>> 408b3d41611d508bf8ff92eb3551747cca4b282e
     }
 
     public String getName() {
@@ -109,7 +119,7 @@ public class Panier {
     }
     //modifier
     public void ajout(Fruit o) throws PanierPleinException {
-        if (!estPlein() /*(&& !fruits.contains(o))*/) {
+        if (!estPlein()) {
             fruits.add(o);
         } else {
             throw new PanierPleinException("Le panier est plein ou le fruit est déjà présent.");
@@ -149,6 +159,7 @@ public class Panier {
             return false;
         return fruits != null ? fruits.equals(panier.fruits) : panier.fruits == null;
     }
+<<<<<<< HEAD
 
     /*
     public static void main(String[] args) {
@@ -186,3 +197,7 @@ public class Panier {
         }
     }*/
 }
+=======
+}
+
+>>>>>>> 408b3d41611d508bf8ff92eb3551747cca4b282e
