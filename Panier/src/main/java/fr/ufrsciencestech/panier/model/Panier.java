@@ -11,11 +11,11 @@ public class Panier {
 
     public Panier(String name,int contenanceMax) {
         this.setName(name);
-        this.fruits = new ArrayList<Fruit>();
         if (contenanceMax < 1) {
             throw new IllegalArgumentException("La contenance maximale doit être supérieure à 0");
         } else {
             this.contenanceMax = contenanceMax;
+            this.fruits = new ArrayList<Fruit>(contenanceMax);
         }
     }
 
