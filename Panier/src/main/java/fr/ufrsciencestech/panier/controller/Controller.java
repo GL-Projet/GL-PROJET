@@ -10,11 +10,18 @@ import fr.ufrsciencestech.panier.model.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 /**
@@ -47,6 +54,7 @@ public class Controller {
         this.fr = viewIF;
         this.cp = viewCP;
         this.ip = viewIP;
+        cnxdb = new ConnexionBDD();
         fruitfactory = new FruitFactory();
        //pour remplir la liste du fruit dans InterfaceCreerFruit
         this.banane = this.fruitfactory.creerFruit("Banane");
@@ -65,7 +73,7 @@ public class Controller {
         
         
         //pour remplir la liste du fruit proposée
-        remplirLF();
+        //remplirLF();
         //pour remplir la liste des paniers disponibles
         remplirLP();
         
@@ -73,7 +81,7 @@ public class Controller {
         viewCF.buttonValiderListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                cnxdb = new ConnexionBDD();
+                //cnxdb = new ConnexionBDD();
                 String name = "";
                 double price = 0;
                 String origin = "";
@@ -124,8 +132,8 @@ public class Controller {
                 }
                 
                 if(cnxdb.insertFruit(name, price, origin)){
-                    fr.ecraserLF();
-                    remplirLF();
+                    //fr.ecraserLF();
+                    //remplirLF();
                     cf.retourResultat("Fruit ajouté avec succés");
                     cf.reinit();
                 }else {
@@ -133,7 +141,7 @@ public class Controller {
                 }
                
                 
-                cnxdb.closeConnection();
+                //cnxdb.closeConnection();
             }
         });
         
@@ -141,7 +149,7 @@ public class Controller {
         viewCP.buttonValiderListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                cnxdb = new ConnexionBDD();
+                //cnxdb = new ConnexionBDD();
                 panier = new Panier(cp.getNom(), cp.gettype(), cp.getCapacite());
                 if(cnxdb.insertPanier(panier.getName(), panier.getType(), panier.getContenanceMax(), panier.getPrixtotale())){
                     ip.ecraserLP();
@@ -151,7 +159,7 @@ public class Controller {
                 }else {
                     cp.retourResultat("ce panier existe deja");
                 }
-                cnxdb.closeConnection();
+                //cnxdb.closeConnection();
                 
             }
         });
@@ -161,8 +169,14 @@ public class Controller {
         viewIP.buttonModifierListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                //cnxdb = new ConnexionBDD();
                 fr.setVisible(true);
-                fr.receivePanier(ip.getPanier());
+                fr.ecraserLF();
+                remplirLF();
+                fr.receivePanier(ip.getPanier() + ": capacité max = " + cnxdb.getMaxCapacity(ip.getPanier()));               
+                fr.reinitListFruit();
+                fruitOfPanier();
+                //cnxdb.closeConnection();
             }
         });
         
@@ -181,7 +195,7 @@ public class Controller {
                 cp.setVisible(true);
             }
         });
-        
+ 
         //l'action sur le bouton recherche fruit avec filtre
         viewIF.buttonRechercherListener(new ActionListener(){
            @Override
@@ -197,6 +211,7 @@ public class Controller {
                         remplirLFbyname(fr.getFilterText(), filter);
                     } break;
                 }
+               
            }
         });
         
@@ -205,7 +220,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e){
                 DefaultListModel<String> listPays = fr.getListeBoycott();
-                cnxdb = new ConnexionBDD();
+                //cnxdb = new ConnexionBDD();
                 Object[][] tabFruit;
                 tabFruit = cnxdb.listeFruit();
                 List<Fruit> fruits = tabToList(tabFruit);
@@ -222,7 +237,7 @@ public class Controller {
                 for (Fruit f : fruits){
                     fr.remplirComboBox(f.toString());
                 }
-                cnxdb.closeConnection();
+                //cnxdb.closeConnection();
             }
         });
         
@@ -230,14 +245,139 @@ public class Controller {
         viewIF.buttonAjoutFruitListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                cnxdb = new ConnexionBDD();
+                //cnxdb = new ConnexionBDD();
+                //l'ajout du fruit
                 String nomPanier = ip.getPanier();
                 int idFruit = fr.recupererFruit();
                 double poid = fr.getPoid();
-                double valeur = cnxdb.getPrixFruit(idFruit) * poid;
-                cnxdb.insertFruitToPanier(nomPanier, idFruit, poid, valeur);
+                BigDecimal att1 = BigDecimal.valueOf(cnxdb.getPrixFruit(idFruit));
+                BigDecimal att2 = BigDecimal.valueOf(poid);
+                BigDecimal res = att1.multiply(att2);
+                res =  res.setScale(2, RoundingMode.HALF_UP);
+                double valeur = res.doubleValue();
+                String messageRetour = cnxdb.insertFruitToPanier(nomPanier, idFruit, poid, valeur);
+                ip.afficherCout(String.valueOf(cnxdb.getCout(ip.getPanier())));
+                fr.receiveMessageRetour(messageRetour);
+                //afficher la liste 
+                fr.reinitListFruit();
+                fruitOfPanier();
+                fr.reinitPoid();
+                fr.desactiverButtonModif();
+                fr.desactiverButtonSupp();
+                ip.reinitListFruit();
+                fruitOfMain();
+                
+                //cnxdb.closeConnection();
             }
         });
+        
+        //l'action sur la selection d'un panier dans interfacePanier qui affiche le contenu du panier dans la meme interface
+        viewIP.selectedFruitListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e){
+                ip.reinitListFruit();
+                //cnxdb = new ConnexionBDD();
+                /*List<String> fruit;
+                fruit = cnxdb.getFruitFromPanier(ip.getPanier());
+                for (String f: fruit){
+                    ip.remplirListFruit(f);
+                }*/
+                fruitOfMain();
+                ip.receiveType(cnxdb.typePanier(ip.getPanier()));
+                ip.afficherCout(String.valueOf(cnxdb.getCout(ip.getPanier())));
+                //cnxdb.closeConnection();
+            }
+        });
+        
+        //l'action sur le bouton supprimer un panier
+        viewIP.buttonSuppPanierListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //cnxdb = new ConnexionBDD();
+                if(cnxdb.deletePanier(ip.getPanier())){
+                    ip.ecraserLP();
+                    remplirLP();
+                    ip.desactiverButton();
+                }
+                //cnxdb.closeConnection();
+            }
+        });
+        
+        //la suppression d'un fruit dans un panier
+        viewIF.buttonSuppFruitListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //cnxdb = new ConnexionBDD();
+                cnxdb.deleteFruitFromPanier(ip.getPanier(), fr.getIdFruit());
+                ip.afficherCout(String.valueOf(cnxdb.getCout(ip.getPanier())));
+                fr.reinitListFruit();
+                fruitOfPanier();
+                ip.reinitListFruit();
+                fruitOfMain();
+                fr.desactiverButtonSupp();
+                fr.desactiverButtonModif();
+                //cnxdb.closeConnection();
+            }
+        });
+        
+        //reinitialiser de list des fruits proposés
+        fr.getMainFrame().addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                fr.reinitListBoycott();
+                
+            }
+        });
+        
+        //l'action sur le bouton modifier le poid
+        viewIF.buttonModifPoidListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //cnxdb = new ConnexionBDD();
+                cnxdb.updatePoidFruit(ip.getPanier(), fr.getIdFruit(), fr.getNewPoid());
+                ip.afficherCout(String.valueOf(cnxdb.getCout(ip.getPanier())));
+                fr.reinitListFruit();
+                fruitOfPanier();
+                fr.desactiverButtonSupp();
+                fr.desactiverButtonModif();
+                ip.reinitListFruit();
+                fruitOfMain();
+                fr.reinitNPoid();
+                //cnxdb.closeConnection();
+            }
+        });
+        
+        //l'action sur le bouton quitter panier
+        viewIF.buttonQuitterListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                fr.reinitListBoycott();
+                fr.desactiverButtonModif();
+                fr.desactiverButtonSupp();
+                fr.dispose();
+            }
+        });
+        
+        //supprimer le filtre des fruits
+        viewIF.buttonSuppFiltreListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //cnxdb = new ConnexionBDD();
+                fr.reinitFiltre();
+                fr.ecraserLF();
+                remplirLF();
+                //cnxdb.closeConnection();
+            }
+        });
+        
+        ip.getMainFrame().addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                fermerCnxBDD();
+                
+            }
+        });
+ 
         
     }
     
@@ -272,37 +412,64 @@ public class Controller {
    
     //recuperer la liste du fruit depuis la bdd et remplir la liste proposée dans InterfaceFruit
     public void remplirLF(){
-        this.cnxdb = new ConnexionBDD();
+        //this.cnxdb = new ConnexionBDD();
         Object[][] tabFruit;
         tabFruit = cnxdb.listeFruit();
         List<Fruit> lst = tabToList(tabFruit);
         for (Fruit f : lst){
             fr.remplirComboBox(f.toString());
         }
-        cnxdb.closeConnection();
+        //cnxdb.closeConnection();
         
     }
     
     //recuperer la liste du fruit depuis la bdd en utilisant le filtre du nom
     public void remplirLFbyname(String text, String filter){
-        this.cnxdb = new ConnexionBDD();
+        //this.cnxdb = new ConnexionBDD();
         Object[][] tabFruit;
         tabFruit = cnxdb.getFruitByName(text, filter);
         List<Fruit> lst = tabToList(tabFruit);
         for (Fruit f : lst){
             fr.remplirComboBox(f.toString());
         }
-        cnxdb.closeConnection();
+        //cnxdb.closeConnection();
     }
     
     //recuperer la liste des paniers depuis la bdd et remplir la liste des paniers disponibles dans InterfacePanier
     public void remplirLP(){
-        this.cnxdb = new ConnexionBDD();
+        //this.cnxdb = new ConnexionBDD();
         List<String> panier;
         panier = cnxdb.listePanier();
         for (String name : panier){
             ip.remplirListPanier(name);
         }
+        //cnxdb.closeConnection();
+    }
+    
+    //récuperer la list des fruits d'un panier pour InterfaceFruit
+    public void fruitOfPanier(){
+        //this.cnxdb = new ConnexionBDD();
+        List<String> fruit;
+        fruit = cnxdb.getFruitFromPanier(ip.getPanier());
+        for (String f: fruit){
+            fr.remplirListFruit(f);
+        }
+        //cnxdb.closeConnection();
+    }
+    
+    //récuperer la list des fruits d'un panier pour InterfaceFruit
+    public void fruitOfMain(){
+        //this.cnxdb = new ConnexionBDD();
+        List<String> fruit;
+        fruit = cnxdb.getFruitFromPanier(ip.getPanier());
+        for (String f: fruit){
+            ip.remplirListFruit(f);
+        }
+        //cnxdb.closeConnection();
+    }
+    
+    public void fermerCnxBDD(){
         cnxdb.closeConnection();
     }
+    
 }
