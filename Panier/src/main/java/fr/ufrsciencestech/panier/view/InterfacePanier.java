@@ -44,8 +44,9 @@ public class InterfacePanier extends javax.swing.JFrame {
         
         jLabelNomPanier.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNomPanier.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 18));
-        
-        ImageIcon imageIcon = new ImageIcon("src/main/java/image/recherche.png");
+
+        ImageIcon imageIcon = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/recherche.png");
+        System.out.println(imageIcon.getDescription());
         // Affectez l'image au bouton
         jButton1.setIcon(imageIcon);
         //pour remplir la liste des paniers

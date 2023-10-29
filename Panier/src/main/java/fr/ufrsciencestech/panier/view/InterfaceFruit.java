@@ -45,19 +45,19 @@ public class InterfaceFruit extends javax.swing.JFrame {
         jLabelNomPanier.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 17));
         jLabelBoycot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
-        ImageIcon IconRecherche = new ImageIcon("src/main/java/image/recherche.png");
+        ImageIcon IconRecherche = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/recherche.png");
         jButtonRecherche.setIcon(IconRecherche);
         
-        ImageIcon IconPlus = new ImageIcon("src/main/java/image/plus.png");
+        ImageIcon IconPlus = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/plus.png");
         jButtonAjouter.setIcon(IconPlus);
         
-        ImageIcon IconSuprBoycot = new ImageIcon("src/main/java/image/corbeil.png");
+        ImageIcon IconSuprBoycot = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/corbeil.png");
         jButtonSuprBoycot.setIcon(IconSuprBoycot);
         
-        ImageIcon IconSupr = new ImageIcon("src/main/java/image/corbeil.png");
+        ImageIcon IconSupr = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/corbeil.png");
         jButtonSupp.setIcon(IconSupr);
         
-        ImageIcon IconModif = new ImageIcon("src/main/java/image/modifier.png");
+        ImageIcon IconModif = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/modifier.png");
         //jButtonModif.setIcon(IconModif);
         //pour la liste des pays à boycotter
         listModel = new DefaultListModel<>();

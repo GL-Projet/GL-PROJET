@@ -11,12 +11,9 @@ public class Panier {
 
     public Panier(String name, String type, int contenanceMax) {
         this.setName(name);
-<<<<<<< HEAD
         this.setType(type);
         prixtotale=0;
         //this.fruits = new ArrayList<Fruit>();
-=======
->>>>>>> 408b3d41611d508bf8ff92eb3551747cca4b282e
         if (contenanceMax < 1) {
             throw new IllegalArgumentException("La contenance maximale doit être supérieure à 0");
         } else {
@@ -55,14 +52,8 @@ public class Panier {
         return prixtotale;
     }
 
-<<<<<<< HEAD
-    public void setPrixtotale(double prixtotale) {
-        for (Fruit fruit:fruits)
-            this.prixtotale+= fruit.getPrix();
-=======
     private void setPrixtotale() {
         prixtotale=0;for (Fruit fruit:fruits)this.prixtotale+= fruit.getPrix();
->>>>>>> 408b3d41611d508bf8ff92eb3551747cca4b282e
     }
 
     public String getName() {
@@ -159,45 +150,5 @@ public class Panier {
             return false;
         return fruits != null ? fruits.equals(panier.fruits) : panier.fruits == null;
     }
-<<<<<<< HEAD
-
-    /*
-    public static void main(String[] args) {
-        // Tests de la classe Panier
-        Panier p = new Panier("",5);
-
-        Orange o1 = new Orange(0.2, "Espagne");
-        Orange o2 = new Orange(0.3, "France");
-        //Banane b1 = new Banane(0.25, "Équateur");
-        Papaye papaye = new Papaye(1.5, "Brésil");
-
-        try {
-            p.ajout(o1);
-            p.ajout(o2);
-            //p.ajout(b1);
-            p.ajout(papaye);
-
-            System.out.println("Contenu du panier :");
-            System.out.println(p);
-
-            System.out.println("Prix total du panier : " + p.getPrix() + " euros");
-
-            System.out.println("Boycott des oranges d'Espagne :");
-            p.boycotteOrigine("Espagne");
-            System.out.println(p);
-
-            p.retrait();
-            System.out.println("Retrait d'un fruit :");
-            System.out.println(p);
-
-            System.out.println("Test d'égalité de paniers : " + p.equals(p));
-
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-    }*/
-}
-=======
 }
 
->>>>>>> 408b3d41611d508bf8ff92eb3551747cca4b282e
