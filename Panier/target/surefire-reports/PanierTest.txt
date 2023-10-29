@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: PanierTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in PanierTest
+testRetraitFruitPanierVide(PanierTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<fr.ufrsciencestech.panier.model.Panier$PanierVideException> but was<java.lang.NullPointerException>
+	at PanierTest.testRetraitFruitPanierVide(PanierTest.java:40)
+
+testBoycotteOrigine(PanierTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at PanierTest.testBoycotteOrigine(PanierTest.java:58)
+
+testAjoutFruitPanierPlein(PanierTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<fr.ufrsciencestech.panier.model.Panier$PanierPleinException> but was<java.lang.NullPointerException>
+	at PanierTest.testAjoutFruitPanierPlein(PanierTest.java:23)
+
+testPrixPanier(PanierTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at PanierTest.testPrixPanier(PanierTest.java:48)
+
+testAjoutFruit(PanierTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at PanierTest.testAjoutFruit(PanierTest.java:15)
+
+testRetraitFruit(PanierTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at PanierTest.testRetraitFruit(PanierTest.java:32)
+

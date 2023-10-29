@@ -1,0 +1,12 @@
+fr\ufrsciencestech\panier\AppTest.class
+OrangeTest.class
+PanierVideExceptionTest.class
+PapayeTest.class
+fr\ufrsciencestech\panier\model\FruitFactoryTest.class
+PommeTest.class
+fr\ufrsciencestech\panier\model\ConnexionBDDTest.class
+FraiseTest.class
+KiwiTest.class
+PanierTest.class
+fr\ufrsciencestech\panier\model\BananeTest.class
+PanierPleinExceptionTest.class

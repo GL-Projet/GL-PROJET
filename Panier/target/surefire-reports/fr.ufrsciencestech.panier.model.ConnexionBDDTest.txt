@@ -1,0 +1,48 @@
+-------------------------------------------------------------------------------
+Test set: fr.ufrsciencestech.panier.model.ConnexionBDDTest
+-------------------------------------------------------------------------------
+Tests run: 16, Failures: 11, Errors: 0, Skipped: 0, Time elapsed: 0.318 s <<< FAILURE! - in fr.ufrsciencestech.panier.model.ConnexionBDDTest
+testCalculerCout(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.232 s  <<< FAILURE!
+java.lang.AssertionError: expected:<1.0> but was:<4.0>
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testCalculerCout(ConnexionBDDTest.java:138)
+
+testInsertFruitToPanier(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.004 s  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[]> but was:<[le fruit existe deja dans le panier]>
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testInsertFruitToPanier(ConnexionBDDTest.java:107)
+
+testCout(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError: expected:<1.0> but was:<4.0>
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testCout(ConnexionBDDTest.java:130)
+
+testInsertFruit(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testInsertFruit(ConnexionBDDTest.java:45)
+
+testGetPrixFruit(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError: expected:<1.0> but was:<1.49>
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testGetPrixFruit(ConnexionBDDTest.java:93)
+
+testDeleteFruitFromPanier(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.017 s  <<< FAILURE!
+java.lang.AssertionError: expected:<0.5> but was:<3.0>
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testDeleteFruitFromPanier(ConnexionBDDTest.java:148)
+
+testVerifFruitPanier(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.004 s  <<< FAILURE!
+java.lang.AssertionError
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testVerifFruitPanier(ConnexionBDDTest.java:100)
+
+testVerifPanier(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testVerifPanier(ConnexionBDDTest.java:59)
+
+testInsertPanier(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testInsertPanier(ConnexionBDDTest.java:64)
+
+testGetFruitFromPanier(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.006 s  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[1- Pomme de France ---------- 1.0 Kg * 1.0€ = 1].0> but was:<[2- Banane de France ---------- 2.0 Kg * 2.09€ = 3].0>
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testGetFruitFromPanier(ConnexionBDDTest.java:117)
+
+testGetFruitByName(fr.ufrsciencestech.panier.model.ConnexionBDDTest)  Time elapsed: 0.004 s  <<< FAILURE!
+java.lang.AssertionError: expected:<1> but was:<4>
+	at fr.ufrsciencestech.panier.model.ConnexionBDDTest.testGetFruitByName(ConnexionBDDTest.java:86)
+
