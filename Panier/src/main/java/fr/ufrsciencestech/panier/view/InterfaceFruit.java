@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.util.ArrayList;
 
 
 /**
@@ -86,6 +86,15 @@ public class InterfaceFruit extends javax.swing.JFrame {
         DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) jComboBoxFruit.getModel();
         
         comboBoxModel.addElement(element);
+    }
+
+    public ArrayList<String> getElementFromComboBox(){
+        DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) jComboBoxFruit.getModel();
+        ArrayList<String> listeFruit=new ArrayList<String>();
+        for (int i=0;i<comboBoxModel.getSize();i++) {
+            listeFruit.add(comboBoxModel.getElementAt(i));
+        }
+        return listeFruit;
     }
     
     public void ecraserLF(){

@@ -5,10 +5,9 @@
 package fr.ufrsciencestech.panier.view;
 
 
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
+import java.util.ArrayList;
 import javax.swing.event.ListSelectionListener;
 /**
  *
@@ -46,7 +45,6 @@ public class InterfacePanier extends javax.swing.JFrame {
         jLabelNomPanier.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 18));
 
         ImageIcon imageIcon = new ImageIcon("Panier/src/main/java/fr/ufrsciencestech/panier/image/recherche.png");
-        System.out.println(imageIcon.getDescription());
         // Affectez l'image au bouton
         jButton1.setIcon(imageIcon);
         //pour remplir la liste des paniers
@@ -68,6 +66,13 @@ public class InterfacePanier extends javax.swing.JFrame {
     //remplir la liste des paniers 
     public void remplirListPanier(String element){
         listModel.addElement(element);
+    }
+    public ArrayList<String> getElementFromListPanier(){
+        ArrayList<String> listePanier =new ArrayList<String>();
+        for (int i=0;i<listModel.getSize()/2;i++) {
+            listePanier.add(listModel.getElementAt(i));
+        }
+        return listePanier;
     }
     
     public void ecraserLP(){
@@ -95,12 +100,24 @@ public class InterfacePanier extends javax.swing.JFrame {
     public String getPanier(){
         return jListPanier.getSelectedValue();
     }
-    
+
+    public void setPanier(String Panier){
+        jListPanier.setSelectedValue(Panier,false);
+    }
+
     //liste des fruits de chaque panier
     public void remplirListFruit(String element){
         listFruit.addElement(element);
     }
-    
+
+    public ArrayList<String> getElementFromListFruit(){
+        ArrayList<String> listeFruit=new ArrayList<String>();
+        for (int i=0;i<listFruit.getSize();i++) {
+            listeFruit.add(listFruit.getElementAt(i));
+        }
+        return listeFruit;
+    }
+
     public void reinitListFruit(){
         listFruit.removeAllElements();
     }
