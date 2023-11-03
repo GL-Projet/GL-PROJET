@@ -49,11 +49,12 @@ public class Controller {
     
     
    
-    public Controller(InterfaceCreerFruit viewCF, InterfaceFruit viewIF, InterfaceCreerPanier viewCP, InterfacePanier viewIP){
-        this.cf = viewCF;
-        this.fr = viewIF;
-        this.cp = viewCP;
-        this.ip = viewIP;
+    public Controller(){
+        this.cf = new InterfaceCreerFruit();
+        this.fr = new InterfaceFruit();
+        this.cp = new InterfaceCreerPanier();
+        this.ip = new InterfacePanier();
+        this.ip.setEnabled(true);
         cnxdb = new ConnexionBDD();
         fruitfactory = new FruitFactory();
        //pour remplir la liste du fruit dans InterfaceCreerFruit
@@ -78,7 +79,7 @@ public class Controller {
         remplirLP();
         
         //l'action sur le bouton valider pour creer un fruit
-        viewCF.buttonValiderListener(new ActionListener() {
+        cf.buttonValiderListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();
@@ -146,7 +147,7 @@ public class Controller {
         });
         
         //l'action sur le bouton valider pour creer un panier
-        viewCP.buttonValiderListener(new ActionListener(){
+        cp.buttonValiderListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();
@@ -166,7 +167,7 @@ public class Controller {
         
         
         //l'action sur le bouton modifier dans l'interface du panier
-        viewIP.buttonModifierListener(new ActionListener(){
+        ip.buttonModifierListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();
@@ -181,7 +182,7 @@ public class Controller {
         });
         
         //l'action sur le bouton (jmenu) creer fruit dans l'interface du panier
-        viewIP.buttonCreerFruitListener(new ActionListener(){
+        ip.buttonCreerFruitListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 cf.setVisible(true);
@@ -189,7 +190,7 @@ public class Controller {
         });
         
         //l'action sur le bouton (jmenu) creer panier dans l'interface du panier
-        viewIP.buttonCreerPanierListener(new ActionListener(){
+        ip.buttonCreerPanierListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 cp.setVisible(true);
@@ -197,7 +198,7 @@ public class Controller {
         });
  
         //l'action sur le bouton recherche fruit avec filtre
-        viewIF.buttonRechercherListener(new ActionListener(){
+        fr.buttonRechercherListener(new ActionListener(){
            @Override
            public void actionPerformed(ActionEvent e){
                String filter = fr.getFilter();
@@ -217,7 +218,7 @@ public class Controller {
         });
         
         //l'action sur le bouton d'ajouter et supprimer un pays à boycotter dans classe InterfaceFruit
-        viewIF.buttonAjoutBoycottListener(new ActionListener(){
+        fr.buttonAjoutBoycottListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 DefaultListModel<String> listPays = fr.getListeBoycott();
@@ -243,7 +244,7 @@ public class Controller {
         });
         
         //l'action sur le bouton ajouter un fruit au panier dans InterfaceFruit
-        viewIF.buttonAjoutFruitListener(new ActionListener(){
+        fr.buttonAjoutFruitListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();
@@ -273,7 +274,7 @@ public class Controller {
         });
         
         //l'action sur la selection d'un panier dans interfacePanier qui affiche le contenu du panier dans la meme interface
-        viewIP.selectedFruitListener(new ListSelectionListener(){
+        ip.selectedFruitListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent e){
                 ip.reinitListFruit();
@@ -291,7 +292,7 @@ public class Controller {
         });
         
         //l'action sur le bouton supprimer un panier
-        viewIP.buttonSuppPanierListener(new ActionListener(){
+        ip.buttonSuppPanierListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();
@@ -305,7 +306,7 @@ public class Controller {
         });
         
         //la suppression d'un fruit dans un panier
-        viewIF.buttonSuppFruitListener(new ActionListener(){
+        fr.buttonSuppFruitListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();
@@ -331,7 +332,7 @@ public class Controller {
         });
         
         //l'action sur le bouton modifier le poid
-        viewIF.buttonModifPoidListener(new ActionListener(){
+        fr.buttonModifPoidListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();
@@ -349,7 +350,7 @@ public class Controller {
         });
         
         //l'action sur le bouton quitter panier
-        viewIF.buttonQuitterListener(new ActionListener(){
+        fr.buttonQuitterListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 fr.reinitListBoycott();
@@ -360,7 +361,7 @@ public class Controller {
         });
         
         //supprimer le filtre des fruits
-        viewIF.buttonSuppFiltreListener(new ActionListener(){
+        fr.buttonSuppFiltreListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 //cnxdb = new ConnexionBDD();

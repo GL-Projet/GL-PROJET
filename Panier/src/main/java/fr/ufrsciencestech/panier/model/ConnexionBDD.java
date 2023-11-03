@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ConnexionBDD {
 
-    private static final String URL = "jdbc:sqlite:bddprojetgl.db";
+    private static final String URL = "jdbc:sqlite:../bddprojetgl.db";
     private Connection connection;
 
     //Connexion à la base de donnée
