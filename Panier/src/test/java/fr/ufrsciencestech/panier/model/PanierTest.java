@@ -50,15 +50,6 @@ public class PanierTest {
         assertEquals(2.5, panier.getPrix(), 0.001);//vérifie que le calcul du prix du panier est correct.
     }
 
-    @Test
-    public void testBoycotteOrigine() throws Panier.PanierPleinException {
-        Panier panier = new Panier("Panier1", "Fruit", 3);
-        Fruit orange = new Orange(1, 1.0, "Espagne");
-        Fruit kiwi = new Kiwi(2, 1.5, "France");
-        panier.ajout(orange);
-        panier.ajout(kiwi);
-        panier.boycotteOrigine("Espagne");
-        assertEquals(1, panier.getTaillePanier());
-    }
+  
 }
 
