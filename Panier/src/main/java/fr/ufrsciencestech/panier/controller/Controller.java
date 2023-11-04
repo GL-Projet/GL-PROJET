@@ -31,7 +31,6 @@ import javax.swing.event.ListSelectionListener;
 public class Controller {
     
     private ConnexionBDD cnxdb;
-    private FruitFactory fruitfactory;
     private InterfaceCreerFruit cf;
     private InterfaceFruit fr;
     private InterfaceCreerPanier cp;
@@ -43,6 +42,12 @@ public class Controller {
     private Fruit papaye;
     private Fruit pomme;
     private Panier panier;
+    FruitFactory bananeFactory;
+    FruitFactory fraiseFactory;
+    FruitFactory kiwiFactory;
+    FruitFactory orangeFactory;
+    FruitFactory papayeFactory;
+    FruitFactory pommeFactory;
     
 
     
@@ -56,19 +61,24 @@ public class Controller {
         this.ip = new InterfacePanier();
         this.ip.setEnabled(true);
         cnxdb = new ConnexionBDD();
-        fruitfactory = new FruitFactory();
+        this.bananeFactory = new BananeFactory();
+        this.fraiseFactory = new FraiseFactory();
+        this.kiwiFactory = new KiwiFactory();
+        this.orangeFactory = new OrangeFactory();
+        this.papayeFactory = new PapayeFactory();
+        this.pommeFactory = new PommeFactory();
        //pour remplir la liste du fruit dans InterfaceCreerFruit
-        this.banane = this.fruitfactory.creerFruit("Banane");
+        this.banane = this.bananeFactory.creerFruit();
         cf.remplirComboBox(this.banane.getNom());
-        this.fraise = this.fruitfactory.creerFruit("Fraise");
+        this.fraise = this.fraiseFactory.creerFruit();
         cf.remplirComboBox(this.fraise.getNom());
-        this.kiwi = this.fruitfactory.creerFruit("Kiwi");
+        this.kiwi = this.kiwiFactory.creerFruit();
         cf.remplirComboBox(this.kiwi.getNom());
-        this.orange = this.fruitfactory.creerFruit("Orange");
+        this.orange = this.orangeFactory.creerFruit();
         cf.remplirComboBox(this.orange.getNom());
-        this.papaye = this.fruitfactory.creerFruit("Papaye");
+        this.papaye = this.papayeFactory.creerFruit();
         cf.remplirComboBox(this.papaye.getNom());
-        this.pomme = this.fruitfactory.creerFruit("Pomme");
+        this.pomme = this.pommeFactory.creerFruit();
         cf.remplirComboBox( this.pomme.getNom());
         
         
@@ -390,19 +400,24 @@ public class Controller {
         this.cp = viewCP;
         this.ip = viewIP;
         cnxdb = new ConnexionBDD(url);
-        fruitfactory = new FruitFactory();
-        //pour remplir la liste du fruit dans InterfaceCreerFruit
-        this.banane = this.fruitfactory.creerFruit("Banane");
+        this.bananeFactory = new BananeFactory();
+        this.fraiseFactory = new FraiseFactory();
+        this.kiwiFactory = new KiwiFactory();
+        this.orangeFactory = new OrangeFactory();
+        this.papayeFactory = new PapayeFactory();
+        this.pommeFactory = new PommeFactory();
+       //pour remplir la liste du fruit dans InterfaceCreerFruit
+        this.banane = this.bananeFactory.creerFruit();
         cf.remplirComboBox(this.banane.getNom());
-        this.fraise = this.fruitfactory.creerFruit("Fraise");
+        this.fraise = this.fraiseFactory.creerFruit();
         cf.remplirComboBox(this.fraise.getNom());
-        this.kiwi = this.fruitfactory.creerFruit("Kiwi");
+        this.kiwi = this.kiwiFactory.creerFruit();
         cf.remplirComboBox(this.kiwi.getNom());
-        this.orange = this.fruitfactory.creerFruit("Orange");
+        this.orange = this.orangeFactory.creerFruit();
         cf.remplirComboBox(this.orange.getNom());
-        this.papaye = this.fruitfactory.creerFruit("Papaye");
+        this.papaye = this.papayeFactory.creerFruit();
         cf.remplirComboBox(this.papaye.getNom());
-        this.pomme = this.fruitfactory.creerFruit("Pomme");
+        this.pomme = this.pommeFactory.creerFruit();
         cf.remplirComboBox( this.pomme.getNom());
 
 
