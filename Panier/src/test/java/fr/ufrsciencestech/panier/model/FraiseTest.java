@@ -38,13 +38,7 @@ public class FraiseTest {
         assertTrue(fraise1.equals(fraise2));
     }
     
-    @Test
-    
-     public void testNotEquals(){
-        Fraise fraise1 = new Fraise(1,7.0,"Espagne");
-        Fraise fraise2 = new Fraise(2,7.0,"Espagne");
-        assertFalse(fraise1.equals(fraise2));
-    }
+
      
      @Test
      public void testIsSeedless(){

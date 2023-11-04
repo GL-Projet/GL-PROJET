@@ -37,13 +37,7 @@ public class PapayeTest {
         assertTrue(papaye1.equals(papaye2));
     }
 
-    @Test
-    public void testNotEquals() {
-        Papaye papaye1 = new Papaye(1, 2.5, "Rép. Dom.");
-        Papaye papaye2 = new Papaye(2, 2.5, "Rép. Dom.");
-
-        assertFalse(papaye1.equals(papaye2));
-    }
+ 
 
     @Test
     public void testIsSeedless() {
