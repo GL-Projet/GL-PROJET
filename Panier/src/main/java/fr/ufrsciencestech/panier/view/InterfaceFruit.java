@@ -235,6 +235,83 @@ public class InterfaceFruit extends javax.swing.JFrame {
     public void buttonQuitterListener(ActionListener listener){
         this.boutonQuitterListener = listener;
     }
+
+    public ActionListener getBoutonQuitterListener() {
+        return boutonQuitterListener;
+    }
+
+    public ActionListener getBoutonModifPoidListener() {
+        return boutonModifPoidListener;
+    }
+
+    public JTextField getNvPoid() {
+        return nvPoid;
+    }
+
+    public JList<String> getjListBoycot() {
+        return jListBoycot;
+    }
+
+    public ActionListener getBoutonSuppFruitListener() {
+        return boutonSuppFruitListener;
+    }
+
+    public JLabel getMessageRetour() {
+        return messageRetour;
+    }
+
+    public DefaultListModel<String> getListFruit() {
+        return listFruit;
+    }
+
+    public JTextField getPoids() {
+        return Poids;
+    }
+
+    public JList<String> getjListFruit() {
+        return jListFruit;
+    }
+
+    public ActionListener getBoutonAjoutFruitListener() {
+        return boutonAjoutFruitListener;
+    }
+
+    public JLabel getjLabelNomPanier() {
+        return jLabelNomPanier;
+    }
+
+    public ActionListener getBoutonAjoutBoycottListener() {
+        return boutonAjoutBoycottListener;
+    }
+
+    public JButton getjButtonSupp() {
+        return jButtonSupp;
+    }
+
+    public JButton getjButtonModifierPoid() {
+        return jButtonModifierPoid;
+    }
+
+    public JComboBox<String> getjComboBoxFruit() {
+        return jComboBoxFruit;
+    }
+
+    public ActionListener getBoutonRechercheListener() {
+        return boutonRechercheListener;
+    }
+
+    public JTextField getjTextField1() {
+        return jTextField1;
+    }
+
+    public ActionListener getBoutonSuppFiltreListener() {
+        return boutonSuppFiltreListener;
+    }
+
+    public JComboBox<String> getjComboBox1() {
+        return jComboBox1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
