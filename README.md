@@ -28,5 +28,3 @@ Pour construire ces interfaces on a utilisé comme logiciel netbeans qui offre u
 Pour démarrer l'application, il vous suffira de récupérer l'ensemble du code mis à disposition via le lien GitHub suivant : [https://github.com/GL-Projet/GL-PROJET ].
 Ensuite, lancez le fichier TestMVC.java dans le framework NetBeans, disponible dans le répertoire : Panier/src/main/java/fr/ufrsciencestech/panier.
 Par la suite, l'interface ci-dessous s'affichera, contenant des données prédéfinies pour visualiser et tester l'application.
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=GL-Projet&layout=compact&theme=vision-friendly-dark)](https://github.com/anuraghazra/github-readme-stats)
